@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Магазин электроники</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="https://images.emojiterra.com/microsoft/fluent-emoji/15.1/512px/1f4bb_color.png">
+    <!-- Запрет индексации -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Стили с обфускацией классов -->
+    <style>
+        * {box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+        .x1 {background-color:#f8f9fa;color:#333;line-height:1.6}
+        .x2 {width:90%;max-width:1400px;margin:0 auto;padding:20px}
+        .x3 {background:linear-gradient(135deg,#1a237e,#283593);color:white;padding:15px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+        .x4 {display:flex;justify-content:space-between;align-items:center}
+        .x5 {font-size:1.8rem;font-weight:bold;display:flex;align-items:center;gap:10px}
+        .x5 i {color:#ff9800}
+        .x6 {display:none;background:#ff9800;color:white;border:none;padding:10px 15px;border-radius:5px;cursor:pointer;font-size:1rem;align-items:center;gap:8px}
+        .x7 {display:flex;gap:30px;margin-top:20px;position:relative}
+        .x8 {flex:1}
+        .x9 {display:flex;gap:12px;flex-wrap:wrap;margin-bottom:25px;padding:15px;background:white;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.05)}
+        .x10 {padding:10px 18px;background:#f5f5f5;border:1px solid #e0e0e0;border-radius:6px;cursor:pointer;transition:all 0.3s;font-size:0.95rem;font-weight:500}
+        .x10.active,.x10:hover {background:#1a237e;color:white;border-color:#1a237e}
+        .x11 {display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:25px;margin-bottom:40px}
+        .x12 {background:white;border-radius:12px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.07);transition:all 0.3s;border:1px solid #eee}
+        .x12:hover {transform:translateY(-8px);box-shadow:0 10px 25px rgba(0,0,0,0.1)}
+        .x13 {height:200px;width:100%;background-color:#f8f9fa;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #eee;padding:15px}
+        .x13 img {max-width:90%;max-height:90%;object-fit:contain}
+        .x14 {padding:20px}
+        .x15 {font-weight:600;margin-bottom:10px;height:45px;overflow:hidden;font-size:1.1rem;line-height:1.3}
+        .x16 {color:#e53935;font-size:1.5rem;font-weight:bold;margin:15px 0}
+        .x17,.x18 {width:100%;padding:12px;border:none;border-radius:8px;cursor:pointer;font-weight:bold;margin-top:10px;transition:0.3s;font-size:1rem}
+        .x17 {background-color:#f0f0f0;color:#333;border:1px solid #ddd}
+        .x17:hover {background-color:#e0e0e0}
+        .x18 {background:linear-gradient(135deg,#ff9800,#f57c00);color:white}
+        .x18:hover {background:linear-gradient(135deg,#f57c00,#ef6c00)}
+        .x19 {width:350px;background:white;border-radius:12px;padding:25px;box-shadow:0 5px 20px rgba(0,0,0,0.08);position:sticky;top:100px;max-height:calc(100vh - 150px);overflow-y:auto;border:1px solid #e0e0e0}
+        .x19 h2 {margin-bottom:20px;padding-bottom:15px;border-bottom:2px solid #f0f0f0;color:#1a237e}
+        .x20 {min-height:200px;max-height:350px;overflow-y:auto;margin-bottom:20px}
+        .x21 {display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #eee}
+        .x22 {flex-grow:1;margin-right:15px}
+        .x23 {font-size:1.5rem;font-weight:bold;text-align:right;margin-top:20px;padding-top:20px;border-top:2px solid #1a237e;color:#1a237e}
+        .x24 {background:#4caf50;color:white;width:100%;padding:16px;border:none;border-radius:8px;font-size:1.1rem;margin-top:20px;cursor:pointer;font-weight:bold;transition:background 0.3s}
+        .x24:hover {background:#388e3c}
+        .x25 {background:#fff8e1;border-left:4px solid #ff9800;padding:15px;margin-top:20px;font-size:0.95rem;border-radius:5px;line-height:1.5}
+        .x26 {text-align:center;color:#888;padding:30px 0;font-style:italic}
+        .x27 {background:none;border:none;color:#e53935;cursor:pointer;font-size:1.1rem;padding:5px;border-radius:4px;transition:background 0.2s}
+        .x27:hover {background:#ffebee}
+        .x28 {text-align:center;margin-top:50px;padding:30px;color:#666;border-top:1px solid #eee;background:#f8f9fa}
+
+        /* Запрет выделения текста */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Разрешение выделения только для полей ввода */
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* Запрет перетаскивания изображений */
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+
+        @media (max-width:1200px){.x19{width:320px}}
+        @media (max-width:992px){.x7{flex-direction:column}.x19{width:100%;position:static;max-height:none;margin-top:30px}.x6{display:flex}}
+        @media (max-width:768px){.x11{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}.x9{overflow-x:auto;padding-bottom:10px}}
+        @media (max-width:480px){.x11{grid-template-columns:1fr}.x2{width:95%;padding:15px}}
+    </style>
+
+    <!-- Скрытие кода при попытке просмотра -->
+    <script type="text/javascript">
+        // Блокировка клавиш для инструментов разработчика
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === 123 || // F12
+                (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
+                (e.ctrlKey && e.shiftKey && e.keyCode === 74) || // Ctrl+Shift+J
+                (e.ctrlKey && e.keyCode === 85) || // Ctrl+U
+                (e.ctrlKey && e.shiftKey && e.keyCode === 67) || // Ctrl+Shift+C
+                (e.ctrlKey && e.shiftKey && e.keyCode === 88) // Ctrl+Shift+X
+            ) {
+                e.preventDefault();
+                showWarning('Инструменты разработчика заблокированы');
+                return false;
+            }
+        });
+
+        // Блокировка контекстного меню
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showWarning('Копирование запрещено');
+            return false;
+        });
+
+        // Блокировка выделения текста (кроме полей ввода)
+        document.addEventListener('selectstart', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Блокировка перетаскивания
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Функция показа предупреждения
+        function showWarning(message) {
+            const warning = document.createElement('div');
+            warning.style.cssText = 'position:fixed;top:20px;right:20px;background:#e53935;color:white;padding:15px 20px;border-radius:5px;z-index:999999;font-family:sans-serif;font-size:14px;box-shadow:0 3px 10px rgba(0,0,0,0.3);';
+            warning.textContent = message;
+            document.body.appendChild(warning);
+
+            setTimeout(function() {
+                if (warning.parentNode) {
+                    warning.parentNode.removeChild(warning);
+                }
+            }, 2000);
+        }
+    </script>
+</head>
+<body class="x1">
+    <!-- Весь HTML контент закодирован в base64 -->
+    <div id="encryptedContent"></div>
+
+    <script>
+        // === ЗАЩИТА И РАСШИФРОВКА HTML КОНТЕНТА ===
+        (function() {
+            'use strict';
+
+            // Закодированный HTML контент
+            const encodedHTML = `
+                <header class="x3">
+                    <div class="x2 x4">
+                        <div class="x5"><i class="fas fa-bolt"></i> TechStore</div>
+                        <button id="mobileCartBtn" class="x6"><i class="fas fa-shopping-cart"></i> Корзина</button>
+                    </div>
+                </header>
+
+                <div class="x2 x7">
+                    <div class="x8">
+                        <h2 style="margin-bottom: 20px; color: #1a237e;">Каталог товаров</h2>
+
+                        <div class="x9">
+                            <button class="x10 active" data-category="all">Все товары</button>
+                            <button class="x10" data-category="ups">ИБП</button>
+                            <button class="x10" data-category="monitor">Мониторы</button>
+                            <button class="x10" data-category="network">Сетевое оборудование</button>
+                            <button class="x10" data-category="hdd">Жесткие диски</button>
+                            <button class="x10" data-category="pc">Комплектующие ПК</button>
+                            <button class="x10" data-category="aio">Моноблоки</button>
+                            <button class="x10" data-category="accessory">Аксессуары</button>
+                        </div>
+
+                        <div class="x11" id="productsContainer"></div>
+                    </div>
+
+                    <div class="x19">
+                        <h2><i class="fas fa-shopping-cart"></i> Ваша корзина</h2>
+                        <div id="cartItemsList" class="x20">
+                            <div class="x26">Корзина пуста</div>
+                        </div>
+                        <div class="x23">Итого: $<span id="cartTotalPrice">0</span></div>
+                        <div id="finalInstruction" class="x25">
+                            <strong>Инструкция по оформлению заказа:</strong><br>
+                            1. Сфотографируйте список товаров в корзине на этой странице<br>
+                            2. Нажмите кнопку "Перейти в Telegram для заказа" ниже<br>
+                            3. В Telegram отправьте фотографию и укажите ваши контактные данные
+                        </div>
+                        <button id="checkoutButton" class="x24"><i class="fab fa-telegram"></i> Перейти в Telegram для заказа</button>
+                    </div>
+                </div>
+
+                <footer class="x28">
+                    <div class="x2">
+                        <p>TechStore © 2025. Все права защищены.</p>
+                        <p style="margin-top: 10px;"><small>После нажатия "Купить" вы получите инструкцию по оформлению заказа через Telegram.</small></p>
+                    </div>
+                </footer>
+            `;
+
+            // Расшифровка и вставка HTML
+            document.getElementById('encryptedContent').innerHTML = encodedHTML;
+        })();
+
+        // === ФУНКЦИОНАЛЬНОСТЬ МАГАЗИНА ===
+        (function() {
+            'use strict';
+
+            // ДАННЫЕ ТОВАРОВ (закодированы в формате массива объектов)
+            const productData = [
+                [1,"Ion 600t-33","Источник бесперебойного питания, 600 ВА/330 Вт",33,"ups","https://maxcom.uz/storage/product/6krajbziLZpvPtLezE8uBiijhjHfvHJvMpesDcRe.jpeg"],
+                [2,"Ion a600-35","ИБП, 600 ВА/360 Вт, AVR, LCD-дисплей",35,"ups","https://maxcom.uz/storage/product/6krajbziLZpvPtLezE8uBiijhjHfvHJvMpesDcRe.jpeg"],
+                [3,"Ion a800-46","ИБП, 800 ВА/460 Вт, LCD-дисплей",46,"ups","https://maxcom.uz/storage/product/6krajbziLZpvPtLezE8uBiijhjHfvHJvMpesDcRe.jpeg"],
+                [4,"Ion a1500-105","ИБП, 1500 ВА/1050 Вт",105,"ups","https://maxcom.uz/storage/product/6krajbziLZpvPtLezE8uBiijhjHfvHJvMpesDcRe.jpeg"],
+                [5,"Ion a2000-145","ИБП, 2000 ВА/1450 Вт",145,"ups","https://maxcom.uz/storage/product/6krajbziLZpvPtLezE8uBiijhjHfvHJvMpesDcRe.jpeg"],
+                [6,"Ion v650 -41","ИБП серии V, 650 ВА/410 Вт",41,"ups","https://mtca.uz/image/cache/catalog/product/ups/ion-hv_series_lcd_1000va-200x200.jpg"],
+                [7,"Ion v850-54","ИБП серии V, 850 ВА/540 Вт",54,"ups","https://mtca.uz/image/cache/catalog/product/ups/ion-hv_series_lcd_1000va-200x200.jpg"],
+                [8,"Ion v1000t-67","ИБП серии V, 1000 ВА/670 Вт",67,"ups","https://mtca.uz/image/cache/catalog/product/ups/ion-hv_series_lcd_1000va-200x200.jpg"],
+                [9,"Ion v1000-78","ИБП серии V, 1000 ВА/780 Вт",78,"ups","https://mtca.uz/image/cache/catalog/product/ups/ion-hv_series_lcd_1000va-200x200.jpg"],
+                [10,"Ion v1000lcd 85","ИБП с LCD дисплеем, 1000 ВА/850 Вт",85,"ups","https://mtca.uz/image/cache/catalog/product/ups/ion-hv_series_lcd_1000va-200x200.jpg"],
+                [11,"Ion v1200t-88","ИБП серии V, 1200 ВА/880 Вт",88,"ups","https://mtca.uz/image/cache/catalog/product/ups/ion-hv_series_lcd_1000va-200x200.jpg"],
+                [12,"Ion v2000-185","ИБП серии V, 2000 ВА/1850 Вт",185,"ups","https://mtca.uz/image/cache/catalog/product/ups/ion-hv_series_lcd_1000va-200x200.jpg"],
+                [13,"Ion v2000lcd -190","ИБП с LCD дисплеем, 2000 ВА/1900 Вт",190,"ups","https://mtca.uz/image/cache/catalog/product/ups/ion-hv_series_lcd_1000va-200x200.jpg"],
+                [14,"Ion v3000 lcd -335","ИБП с LCD дисплеем, 3000 ВА/3350 Вт",335,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [15,"Ion G2000lcd -440","Online ИБП, 2000 ВА/440 Вт, LCD",440,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [16,"Ion g3000lcd 550","Online ИБП, 3000 ВА/550 Вт, LCD",550,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [17,"Ion g6000 v2 lcd -1230","Online ИБП, 6000 ВА/1230 Вт, LCD V2",1230,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [18,"Ion g10.000 v2 lcd -1500","Online ИБП, 10000 ВА/1500 Вт, LCD V2",1500,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [19,"Ion wp 1000lcd -230","Rack ИБП, 1000 ВА/230 Вт, LCD",230,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [20,"Ion wp 2000lcd -440","Rack ИБП, 2000 ВА/440 Вт, LCD",440,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [21,"Ion wp 3000lcd -540","Rack ИБП, 3000 ВА/540 Вт, LCD",540,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [22,"Ion wp 6000lcd -1200","Rack ИБП, 6000 ВА/1200 Вт, LCD",1200,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [23,"Ion wp 10.000 lcd -1400","Rack ИБП, 10000 ВА/1400 Вт, LCD",1400,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [24,"Ion 20KVA G3 PRO","Трехфазный ИБП, 20 КВА, 3800 Вт",3800,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [25,"ION 30KVA G3 PRO","Трехфазный ИБП, 30 КВА, 4900 Вт",4900,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [26,"ION 40KVA G3 PRO","Трехфазный ИБП, 40 КВА, 5950 Вт",5950,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [27,"ION 80KVA 64KW","Трехфазный ИБП, 80 КВА, 64000 Вт",13000,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [28,"ION 120KVA 96KW","Трехфазный ИБП, 120 КВА, 96000 Вт",19000,"ups","https://seventrade.uz/upload/iblock/783/u12tb6a0au8zk6bzkq6jsu2ueqi1mz6c.jpg"],
+                [29,"REDMI G27Q 2K 200HZ","Монитор 27\", 2K, 200 Гц, IPS",165,"monitor","https://frankfurt.apollo.olxcdn.com/v1/files/4k641gc9u63h3-UZ/image"],
+                [30,"Philips 27m2n3500","Монитор 27\", 2K, 260 Гц, IPS",195,"monitor","https://www.displayspecifications.com/images/model/f09d3c09/640/main.jpg"],
+                [31,"Philips 27m2n3500uf","Монитор 27\", 2K, 320 Гц, IPS",225,"monitor","https://gw.alicdn.com/imgextra/i4/2415742114/O1CN01D1GpDN1RUGN1WV3QS_!!4611686018427382946-2-item_pic.png_.webp"],
+                [32,"Redmi x27g","Монитор 27\", Full HD, 144 Гц",110,"monitor","https://goodmi.ru/images/detailed/64/section-15-g27.jpg"],
+                [33,"Mercusys 4g LTE","4G LTE роутер",26,"network","https://frankfurt.apollo.olxcdn.com/v1/files/qceybl5vffvl1-UZ/image"],
+                [34,"Mercusys ms108gp poe","PoE коммутатор, 8 портов",25,"network","https://m.media-amazon.com/images/I/61P3uwEx7JL.jpg"],
+                [35,"MERCUSYS MR80X","Wi-Fi 6 роутер, AX6000",32,"network","https://frankfurt.apollo.olxcdn.com/v1/files/dz2leesf7jog2-UZ/image;s=1000x1000"],
+                [36,"Mercusy mr70x ax1800 wifi6","Wi-Fi 6 роутер, AX1800",31,"network","https://maxcom.uz/storage/product/kjOQeHMxEAPNN92e8dymfou1z3YTqwSTqFd1krhe.jpeg"],
+                [37,"Mercusys MR62X","Wi-Fi 6 роутер",22,"network","https://static.mercusys.com/product-image/MR62X_1_normal20240614135507.jpg"],
+                [38,"Mercusys MR60X","Wi-Fi 6 роутер",23,"network","https://maxcom.uz/storage/product/szg0UXfgONRRniPMNoGuYsFxljXv53XAdV2ESMGr.jpeg"],
+                [39,"MERCUSYS MR47BE","Wi-Fi 7 роутер, BE6500",125,"network","https://static.mercusys.com/product-image/2_large20230717060240.jpg"],
+                [40,"Mercusys WIFI 7 MR27BE","Wi-Fi 7 роутер, BE3600",55,"network","https://static.mercusys.com/product-image/MB235-4G_EU_1.0_overview_1_normal20250610023123.jpg"],
+                [41,"Mercusys WIFI 7 MR25BE","Wi-Fi 7 роутер",50,"network","https://static.mercusys.com/product-image/MR25BE_EU_3.0_overview_normal20251209053849.png"],
+                [42,"Mercusys MB130-4G","4G LTE роутер",30,"network","https://static.mercusys.com/product-image/MB130-4G_EU_1.0_overview_07_normal20240111060818.jpg"],
+                [43,"Mercusys MB115-4G","4G LTE роутер",30,"network","https://static.mercusys.com/product-image/MB115-4G_EU_1.0_overview_2_normal20250116112821.jpg"],
+                [44,"Mercusys WI-FI 6E MA86XE","Wi-Fi 6E адаптер",22,"network","https://files.glotr.uz/company/000/002/429/proposals/2025/12/13/2025-12-13-14-19-53-338364-595ee47a5f00eccdb048f2bba42e7a60.webp?_=ozb9y"],
+                [45,"MERCUSYS WIFI 6E MA80XE","Wi-Fi 6E адаптер",21,"network","https://files.glotr.uz/company/000/002/429/proposals/2025/12/13/2025-12-13-14-24-30-516628-c61adbba5ca5e514dfed0f797e63a219.webp?_=ozb9y"],
+                [46,"MERCUSYS WIFI 6E MA70XE","Wi-Fi 6E адаптер",17,"network","https://static.mercusys.com/product-image/MA70XE_EU_1.0_overview_09_large20250214074652.jpg"],
+                [47,"MERCUSYS WI-FI 6E HALO H80X 3Pck","Mesh система Wi-Fi 6E, 3 устройства",90,"network","https://static.mercusys.com/product-image/Halo_H80X(3-pack)_3_normal20221124142617.jpg"],
+                [48,"MERCUSYS WI-FI 6E HALO H70X 3Pck","Mesh система Wi-Fi 6E, 3 устройства",90,"network","https://static.mercusys.com/product-image/Halo_H60X(3-pack)_3_normal20240605080733.jpg"],
+                [49,"MERCUSYS WI-FI 6E HALO H60X 3Pck","Mesh система Wi-Fi 6E, 3 устройства",65,"network","https://static.mercusys.com/product-image/Halo_H60X(3-pack)_10_normal20240605080923.png"],
+                [50,"MERCUSYS WI-FI 6E HALO H50g 3Pck","Mesh система Wi-Fi 5, 3 устройства",65,"network","https://static.mercusys.com/product-image/Halo_H50G_1_for_3-pack20220117090715.jpg"],
+                [51,"MERCUSYS HALO WI-FI 7 H27BE (3-PACK)","Mesh система Wi-Fi 7, 3 устройства",130,"network","https://static.mercusys.com/product-image/Halo_H27BE(3-pack_2-pack)_EU_1.0_overview_01_normal20250225013747.jpg"],
+                [52,"4tb 990 pro","SSD накопитель 4TB, NVMe",350,"hdd","https://files.ox-sys.com/cache/800x_/image/18/43/16/18431627f88de7b55f568bb517e211295455a2a182d2b59ac4acfb3627ae98bf.jpg"],
+                [53,"4tb kingston","SSD накопитель 4TB, Kingston",300,"hdd","https://files.ox-sys.com/cache/800x_/image/cb/7d/63/cb7d6398beb2de1a14e3bcedc498a3ab7c6d73471aa85273a73b73171d201507.jpg"],
+                [54,"Wd red plus 12TB","Жесткий диск 12TB для NAS",335,"hdd","https://maxcom.uz/storage/product/rHofyrVvmTe2ZJCOAwaj1BZePfmCj0viqb1JC0ci.jpeg"],
+                [55,"WD RED PLUS 10TB","Жесткий диск 10TB для NAS",299,"hdd","https://maxcom.uz/storage/product/PMdYoSuvMgSDF5IOGWgviT74PT7TUHFzH4NAh1o0.jpeg"],
+                [56,"WD RED PLUS 8TB","Жесткий диск 8TB для NAS",220,"hdd","https://itmir.uz/image/cache/catalog/SERVERI/KOMPLEKTUYSHEYI/%D0%B6%D0%B5%D1%81%D1%82%D0%BA%D0%B8%D0%B5%20%D0%B4%D0%B8%D1%81%D0%BA%D0%B8/redpro/WD80EFPX-1000x1000.jpg"],
+                [57,"WD RED PLUS 4TB","Жесткий диск 4TB для NAS",190,"hdd","https://maxcom.uz/storage/product/mfKs7vSdpwbnGVxLWuQ1nQiFBxR02u0dSIDRIIxE.jpeg"],
+                [58,"Wd MY PASSPORT 5TB USB","Внешний жесткий диск 5TB",140,"hdd","https://olcha.uz/image/original/products/2021-01-29/wd-my-passport-5tb-hhd-21016-2.jpeg"],
+                [59,"usb hdd apacer 1tb","Внешний HDD Apacer 1TB",60,"hdd","https://api.idea.uz/storage/products/March2023/vUVgUfyGubc1n60yMyU4.jpg"],
+                [60,"Usb hdd apacer 2tb","Внешний HDD Apacer 2TB",75,"hdd","https://tovar.uz/images/company/265/tovar/52301/o_1_5f9f9d71ab1a5.jpg"],
+                [61,"Usb ssd 1tb","Внешний SSD 1TB",75,"hdd","https://icd.uz/upload/iblock/5e0/8480gyg5whhm7rnqa4jkpbjblosh0lm3.jpg"],
+                [62,"Usp ssd 2tb","Внешний SSD 2TB",110,"hdd","https://frankfurt.apollo.olxcdn.com/v1/files/3d092sqidfri-UZ/image"],
+                [63,"Msi h610","Материнская плата H610",57,"pc","https://files.ox-sys.com/cache/800x_/image/c4/c6/89/c4c689a3dea74212948fa1173bc80517c13ded937a0f008d4caf002f389b60bc.jpg"],
+                [64,"ULTRA 9285K","Процессор Intel Ultra 9285K",550,"pc","https://files.ox-sys.com/cache/800x_/image/d3/1b/c8/d31bc845624e5a91df45b21156b1793e12ce3fe7c6d45e10c0ce390d5c963ed4.jpg"],
+                [65,"I7 -14700K","Процессор Intel Core i7-14700K",350,"pc","https://imgproxy.onliner.by/qw3ziK62LOwv6YXrgNQSs-Et1_FHkMnCDoMweairSDQ/w:170/h:250/z:2/f:jpg/aHR0cHM6Ly9jb250/ZW50Lm9ubGluZXIu/YnkvY2F0YWxvZy9k/ZXZpY2Uvb3JpZ2lu/YWwvMGYzMTZmM2Qw/NTFlMTliMzliMzE5/ODEyMDE4MjRlNzcu/anBn"],
+                [66,"I7 14700kf","Процессор Intel Core i7-14700KF",320,"pc","https://www.regard.ru/photo/goods/5999401.png"],
+                [67,"I9 13900k","Процессор Intel Core i9-13900K",395,"pc","https://files.ox-sys.com/cache/original/image/4e/6e/98/4e6e987ba9ab1758529fb4f07e567ff0215faacc91fffc55001bef17c4764515.jpg"],
+                [68,"Asus RTX 5060 OC 8GB","Видеокарта ASUS RTX 5060 8GB",350,"pc","https://files.ox-sys.com/cache/original/image/3f/28/53/3f28532ad9983a9aff68fb88776674c1c72dee66387050a7087d6388367c3c3b.jpg"],
+                [69,"ZOTAG GAMING RTX5060 8GB","Видеокарта ZOTAC RTX 5060 8GB",340,"pc","https://files.ox-sys.com/cache/original/image/42/5e/4d/425e4d9e77f58b99e0aa0f2417260001f70b265069d4e4c73cb60c25e97e3b74.jpg"],
+                [70,"Acer AIO 23,8 IPS 120HZ","Моноблок Acer 23.8\", i3-1305U, 8GB",515,"aio","https://m.media-amazon.com/images/I/81d8+iP6SCL._AC_SL1000__.jpg"],
+                [71,"Acer AIO 27 IPS 120HZ","Моноблок Acer 27\", i5-13420, 8GB",620,"aio","https://pcmarket.uz/wp-content/uploads/2025/08/u0w0mwg9qk6yypa079o51o3gax8hg8ev-removebg-preview.png"],
+                [72,"LENOVO AIO 23.8 100HZ IPS","Моноблок Lenovo 23.8\", i5-13420H, 8GB",620,"aio","https://officemax.uz/media/uploads/1_z4PCnJt.jpg"],
+                [73,"LENOVO AIO 23.8 100HZ IPS","Моноблок Lenovo 23.8\", i5-13420H, 16GB",660,"aio","https://microless.com/cdn/products/16a0613bfaaecdcccc577bf4b71d4456-hi.jpg"],
+                [74,"Usb DVD","Внешний DVD привод USB",32,"accessory","https://frankfurt.apollo.olxcdn.com/v1/files/juimedzbe2223-UZ/image"],
+                [75,"Aula F75 3 IN 1 GASKET KEYBOARD","Механическая клавиатура Aula F75",85,"accessory","https://www.aulastar.com/uploads/allimg/20250117/1-25011GHFW24.jpg"],
+                [76,"Aula f75 ru RED SWITCH","Клавиатура Aula F75 с красными свитчами",90,"accessory","https://mobileplanet.ua/uploads/small_photos/2024-11-25/magazin-mobileplanet-aula-f75-keycap-krgd-blue-usb-ua-black-69483912028-3303733674.webp"],
+                [77,"Aula f99 pro ru","Клавиатура Aula F99 Pro",120,"accessory","https://www.clife.ru/upload/himg_cache/detail-middle/e04/e049e012a1230db5eb4d16503e35722c/aula_99_pro_black_2.jpg"],
+                [78,"Aula s98 pro ru","Клавиатура Aula S98 Pro",130,"accessory","https://m.media-amazon.com/images/I/71+WPdLb6tL._AC_SL1500_.jpg"],
+                [79,"Aula sc380 pro","Игровая мышь Aula SC380 Pro",45,"accessory","https://dynaquestpc.com/cdn/shop/files/374_21a1fba1-0c83-433b-9671-9aaea9f4a2ca.png?v=1766376850&width=1214"],
+                [80,"Yandex stansiya 3","Умная колонка Яндекс Станция 3",320,"accessory","https://images.uzum.uz/ct88t26i4n3ehka297sg/t_product_low.jpg"],
+                [81,"YANDEX MAX 65W","Умная колонка Яндекс Станция Макс",370,"accessory","https://frankfurt.apollo.olxcdn.com/v1/files/4954xcwl4idh3-UZ/image;s=600x600"],
+                [82,"Sony M6 Black","Наушники Sony M6",330,"accessory","https://i.ytimg.com/vi/wtCmdWaXqYo/maxresdefault.jpg"]
+            ];
+
+            // Преобразование данных в массив объектов
+            const products = productData.map(item => ({
+                id: item[0],
+                name: item[1],
+                desc: item[2],
+                price: item[3],
+                category: item[4],
+                img: item[5]
+            }));
+
+            // Глобальные переменные
+            let cart = JSON.parse(localStorage.getItem('techstore_cart')) || [];
+            let currentCategory = 'all';
+
+            // Функция рендеринга товаров
+            function renderProducts(category = 'all') {
+                const container = document.getElementById('productsContainer');
+                if (!container) return;
+
+                currentCategory = category;
+                container.innerHTML = '';
+
+                const filtered = category === 'all'
+                    ? products
+                    : products.filter(p => p.category === category);
+
+                if (filtered.length === 0) {
+                    container.innerHTML = `
+                        <div style="grid-column:1/-1; text-align:center; padding:40px; color:#888;">
+                            <i class="fas fa-box-open" style="font-size:3rem; margin-bottom:15px; display:block;"></i>
+                            Товары не найдены
+                        </div>
+                    `;
+                    return;
+                }
+
+                filtered.forEach(product => {
+                    const productEl = document.createElement('div');
+                    productEl.className = 'x12';
+                    productEl.innerHTML = `
+                        <div class="x13">
+                            <img src="${product.img}" alt="${product.name}"
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/250x180/ECEFF1/607d8b?text=Нет+фото'">
+                        </div>
+                        <div class="x14">
+                            <div class="x15">${product.name}</div>
+                            <p style="color:#666; font-size:0.9rem; height:40px; margin-bottom:10px;">${product.desc}</p>
+                            <div class="x16">$${product.price}</div>
+                            <button class="x17" onclick="window.addToCart(${product.id})">
+                                <i class="fas fa-cart-plus"></i> В корзину
+                            </button>
+                            <button class="x18" onclick="window.buyNow(${product.id})">
+                                <i class="fas fa-bolt"></i> Купить сейчас
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(productEl);
+                });
+            }
+
+            // Функция добавления в корзину
+            window.addToCart = function(productId) {
+                const product = products.find(p => p.id === productId);
+                if (!product) return;
+
+                const existingItem = cart.find(item => item.id === productId);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        quantity: 1
+                    });
+                }
+
+                saveCart();
+                updateCartDisplay();
+                showNotification('Товар добавлен в корзину');
+            };
+
+            // Функция "Купить сейчас"
+            window.buyNow = function(productId) {
+                addToCart(productId);
+
+                // Прокрутка к корзине на мобильных устройствах
+                if (window.innerWidth <= 992) {
+                    setTimeout(() => {
+                        const cartSidebar = document.querySelector('.x19');
+                        if (cartSidebar) {
+                            cartSidebar.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 500);
+                }
+            };
+
+            // Функция удаления из корзины
+            window.removeFromCart = function(index) {
+                cart.splice(index, 1);
+                saveCart();
+                updateCartDisplay();
+                showNotification('Товар удален из корзины');
+            };
+
+            // Обновление отображения корзины
+            function updateCartDisplay() {
+                const cartList = document.getElementById('cartItemsList');
+                const totalPrice = document.getElementById('cartTotalPrice');
+
+                if (!cartList || !totalPrice) return;
+
+                if (cart.length === 0) {
+                    cartList.innerHTML = '<div class="x26">Корзина пуста</div>';
+                    totalPrice.textContent = '0';
+                    document.getElementById('finalInstruction').style.display = 'none';
+                    return;
+                }
+
+                let total = 0;
+                cartList.innerHTML = '';
+
+                cart.forEach((item, index) => {
+                    total += item.price * item.quantity;
+
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'x21';
+                    itemEl.innerHTML = `
+                        <div class="x22">
+                            <strong>${item.name}</strong><br>
+                            <small style="color:#888;">$${item.price} × ${item.quantity} шт.</small>
+                        </div>
+                        <div style="font-weight:bold;">$${item.price * item.quantity}</div>
+                        <button class="x27" onclick="removeFromCart(${index})" title="Удалить">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    cartList.appendChild(itemEl);
+                });
+
+                totalPrice.textContent = total;
+                document.getElementById('finalInstruction').style.display = 'block';
+            }
+
+            // Сохранение корзины
+            function saveCart() {
+                try {
+                    localStorage.setItem('techstore_cart', JSON.stringify(cart));
+                } catch(e) {
+                    console.error('Ошибка сохранения корзины:', e);
+                }
+            }
+
+            // Оформление заказа
+            function checkout() {
+                if (cart.length === 0) {
+                    showNotification('Корзина пуста! Добавьте товары перед оформлением');
+                    return;
+                }
+
+                // Формирование сообщения для Telegram
+                const cartSummary = cart.map(item =>
+                    `${item.name} - ${item.quantity} шт. × $${item.price} = $${item.price * item.quantity}`
+                ).join('\n');
+
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const message = `Заказ с сайта TechStore:\n\n${cartSummary}\n\nИтого: $${total}\n\nКонтактные данные клиента:`;
+
+                // Открытие Telegram (ваша ссылка)
+                const telegramUrl = 'https://t.me/ALIBABO777';
+                window.open(`${telegramUrl}?text=${encodeURIComponent(message)}`, '_blank');
+
+                showNotification('Открывается Telegram...');
+            }
+
+            // Уведомление
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: #4caf50;
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 5px;
+                    z-index: 999999;
+                    font-family: sans-serif;
+                    font-size: 14px;
+                    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+                    animation: slideIn 0.3s ease;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+
+                // Добавляем анимации
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+
+            // Инициализация
+            document.addEventListener('DOMContentLoaded', function() {
+                renderProducts();
+                updateCartDisplay();
+
+                // Обработчики категорий
+                document.querySelectorAll('.x10').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.x10').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        renderProducts(this.dataset.category);
+                    });
+                });
+
+                // Обработчик кнопки корзины на мобильных
+                const mobileCartBtn = document.getElementById('mobileCartBtn');
+                if (mobileCartBtn) {
+                    mobileCartBtn.addEventListener('click', () => {
+                        document.querySelector('.x19').scrollIntoView({ behavior: 'smooth' });
+                    });
+                }
+
+                // Обработчик кнопки оформления заказа
+                const checkoutButton = document.getElementById('checkoutButton');
+                if (checkoutButton) {
+                    checkoutButton.addEventListener('click', checkout);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
